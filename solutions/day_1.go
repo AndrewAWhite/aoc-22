@@ -2,20 +2,11 @@ package solutions
 
 import (
 	"fmt"
-	"io/ioutil"
 	"sort"
 	"strconv"
 	"strings"
 )
 
-func readInput() string {
-	inputBytes, err := ioutil.ReadFile("./input/day_1/p1.txt")
-	if err != nil {
-		fmt.Printf("Couldn't read puzzle input due to error: %s", err)
-	}
-	inputString := string(inputBytes)
-	return inputString
-}
 
 func sumCalorieSlice(calorieSlice []string) []int {
 	calorieSums := make([]int, len(calorieSlice))
@@ -34,22 +25,20 @@ func sumCalorieSlice(calorieSlice []string) []int {
 	return calorieSums
 }
 
-func Solution_1_1() int{
-	input := readInput()
-	calorieSlice := strings.Split(input, "\n\n")
+func Solution_1_1() string {
+	calorieSlice := readInputSlice("./input/day_1/p1.txt")
 	calorieSums := sumCalorieSlice(calorieSlice)
 	sort.Sort(sort.Reverse(sort.IntSlice(calorieSums)))
-	return calorieSums[0]
+	return fmt.Sprint(calorieSums[0])
 }
 
-func Solution_1_2() int{
-	input := readInput()
-	calorieSlice := strings.Split(input, "\n\n")
+func Solution_1_2() string {
+	calorieSlice := readInputSlice("./input/day_1/p1.txt")
 	calorieSums := sumCalorieSlice(calorieSlice)
 	sort.Sort(sort.Reverse(sort.IntSlice(calorieSums)))
 	top3Cals := 0
 	for i:=0; i<3; i++{
 		top3Cals += calorieSums[i]
 	}
-	return top3Cals
+	return fmt.Sprint(top3Cals)
 }
