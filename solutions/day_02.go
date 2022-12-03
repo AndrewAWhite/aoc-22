@@ -42,7 +42,7 @@ var resultMap = map[result]int{
 	{2, 2}: 1,
 }
 
-func Solution_2_1() int {
+func Solution_02_1() int {
 	input := readInputSlice("./input/day_02/p1.txt")
 	points := 0
 	for _, game := range input {
@@ -55,7 +55,7 @@ func Solution_2_1() int {
 	return points
 }
 
-func Solution_2_2() int {
+func Solution_02_2() int {
 	input := readInputSlice("./input/day_02/p1.txt")
 	points := 0
 	for _, game := range input {

@@ -19,8 +19,8 @@ Which are then called according to the naming convention I've chosen for this pr
 
 ```go
 func main() {
-	fmt.Printf("Part 1: %s\n", solutions.Solution_1_1())
-	fmt.Printf("Part 2: %s\n", solutions.Solution_1_2())
+	fmt.Printf("Part 1: %s\n", solutions.Solution_01_1())
+	fmt.Printf("Part 2: %s\n", solutions.Solution_01_2())
 }
 ```
 
