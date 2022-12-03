@@ -1,10 +1,10 @@
 package solutions
 
-var inherentPointMap = [3]int{1,2,3}
+var inherentPointMap = [3]int{1, 2, 3}
 
-var resultPointMap = [3]int {0,3,6}
+var resultPointMap = [3]int{0, 3, 6}
 
-type result struct{
+type result struct {
 	a int
 	b int
 }
@@ -43,7 +43,7 @@ var resultMap = map[result]int{
 }
 
 func Solution_2_1() int {
-	input := readInputSlice("./input/day_2/p1.txt")
+	input := readInputSlice("./input/day_02/p1.txt")
 	points := 0
 	for _, game := range input {
 		p1d := letterMap[string(game[0])]
@@ -56,7 +56,7 @@ func Solution_2_1() int {
 }
 
 func Solution_2_2() int {
-	input := readInputSlice("./input/day_2/p1.txt")
+	input := readInputSlice("./input/day_02/p1.txt")
 	points := 0
 	for _, game := range input {
 		p1d := letterMap[string(game[0])]

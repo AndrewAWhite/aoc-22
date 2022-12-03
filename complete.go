@@ -6,7 +6,7 @@ import (
 	"github.com/AndrewAWhite/aoc-22/solutions"
 )
 
-func main() {
+func complete() {
 	fmt.Printf("Part 1: %s\n", solutions.Solution_1_1())
 	fmt.Printf("Part 1: %s\n", solutions.Solution_1_2())
 	fmt.Printf("Part 1: %d\n", solutions.Solution_2_1())
