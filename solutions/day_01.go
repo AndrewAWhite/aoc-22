@@ -27,15 +27,15 @@ func sumCalorieSlice(calorieSlice []string) []int {
 	return calorieSums
 }
 
-func Solution_01_1() string {
+func Solution_01_1() int {
 	calorieInput := readInput("./input/day_01/p1.txt")
 	calorieSlice := strings.Split(calorieInput, "\n\n")
 	calorieSums := sumCalorieSlice(calorieSlice)
 	sort.Sort(sort.Reverse(sort.IntSlice(calorieSums)))
-	return fmt.Sprint(calorieSums[0])
+	return calorieSums[0]
 }
 
-func Solution_01_2() string {
+func Solution_01_2() int {
 	calorieInput := readInput("./input/day_01/p1.txt")
 	calorieSlice := strings.Split(calorieInput, "\n\n")
 	calorieSums := sumCalorieSlice(calorieSlice)
@@ -44,5 +44,5 @@ func Solution_01_2() string {
 	for i := 0; i < 3; i++ {
 		top3Cals += calorieSums[i]
 	}
-	return fmt.Sprint(top3Cals)
+	return top3Cals
 }
