@@ -62,15 +62,11 @@ func execInstructions(instructionsDef string, _stacks *[][]string, q int) {
 		dest, _ := strconv.Atoi(m[3])
 		source -= 1
 		dest -= 1
+		v := popLastN(&stacks[source], count)
 		if q == 1 {
-			for i := 0; i < count; i++ {
-				v := popLastN(&stacks[source], 1)
-				stacks[dest] = append(stacks[dest], v...)
-			}
-		} else if q == 2 {
-			v := popLastN(&stacks[source], count)
-			stacks[dest] = append(stacks[dest], v...)
+			v = Reverse(v)
 		}
+		stacks[dest] = append(stacks[dest], v...)
 	}
 }
 
