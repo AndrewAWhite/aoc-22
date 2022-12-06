@@ -1,15 +1,12 @@
 package solutions
 
 import (
-	"container/list"
 	"errors"
 	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
 )
-
-type stack *list.List
 
 type RuneSlice []rune
 
