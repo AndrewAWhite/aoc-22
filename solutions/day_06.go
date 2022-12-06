@@ -5,8 +5,7 @@ func findMarker(input string, n int) int {
 		candidate := input[i : i+n]
 		h := map[rune]int{}
 		for _, char := range candidate {
-			count := h[char]
-			h[char] = count + 1
+			h[char] = h[char] + 1
 		}
 		p := true
 		for _, count := range h {
