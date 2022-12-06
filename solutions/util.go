@@ -1,6 +1,7 @@
 package solutions
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"strings"
@@ -16,6 +17,30 @@ func readInput(filePath string) string {
 }
 
 func readInputSlice(filepath string) []string {
-	input :=  readInput(filepath)
+	input := readInput(filepath)
 	return strings.Split(input, "\n")
+}
+
+func (s RuneSlice) SplitChunks(chunkSize int) ([]RuneSlice, error) {
+	var chunks []RuneSlice
+	for i := 0; i < len(s); i += chunkSize {
+		end := i + 3
+		if end > len(s) {
+			return nil, errors.New("Invalid input, couldn't split into groups")
+		}
+		chunks = append(chunks, s[i:end])
+	}
+	return chunks, nil
+}
+
+func Reverse(s []string) []string {
+	a := make([]string, len(s))
+	copy(a, s)
+
+	for i := len(a)/2 - 1; i >= 0; i-- {
+		opp := len(a) - 1 - i
+		a[i], a[opp] = a[opp], a[i]
+	}
+
+	return a
 }
