@@ -24,4 +24,10 @@ func complete() {
 
 	fmt.Printf("Day 6, Part 1: %d\n", solutions.Solution_06_1())
 	fmt.Printf("Day 6, Part 2: %d\n", solutions.Solution_06_2())
+
+	fmt.Printf("Day 7, Part 1: %d\n", solutions.Solution_07_1())
+	fmt.Printf("Day 7, Part 2: %d\n", solutions.Solution_07_2())
+
+	fmt.Printf("Day 8, Part 1: %d\n", solutions.Solution_08_1())
+	fmt.Printf("Day 8, Part 2: %d\n", solutions.Solution_08_2())
 }

@@ -39,26 +39,6 @@ func calcSizeWalk(dir *File) int {
 	return dir.Total
 }
 
-func printDirTree(dir *File, depth int) {
-	indent := ""
-	for i := 0; i < depth; i++ {
-		indent += "\t"
-	}
-	fmt.Printf("%s - %s\t%d:\n", indent, dir.Name, dir.Total)
-	for _, file := range dir.Children {
-		if file.IsDir {
-			continue
-		}
-		fmt.Printf("%s\t%d\t%s\n", indent, file.Size, file.Name)
-	}
-	for _, file := range dir.Children {
-		if !file.IsDir {
-			continue
-		}
-		printDirTree(file, depth+1)
-	}
-}
-
 func parseCmd(cmdSet []string) (string, string) {
 	cmd := cmdSet[0]
 	cmdSplit := strings.Split(cmd, " ")
