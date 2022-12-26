@@ -64,3 +64,15 @@ func PrintDirTree(dir *File, depth int) {
 		PrintDirTree(file, depth+1)
 	}
 }
+
+func popLastN[T any](stack *[]T, n int) []T {
+	v := (*stack)[len(*stack)-n:]
+	*stack = (*stack)[:len(*stack)-n]
+	return v
+}
+
+func popFirsttN[T any](stack *[]T, n int) []T {
+	v := (*stack)[:n]
+	*stack = (*stack)[n:]
+	return v
+}

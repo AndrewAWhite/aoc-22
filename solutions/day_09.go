@@ -6,12 +6,11 @@ import (
 	"strings"
 )
 
-func stepTail(positions *[]int, path *map[string]bool) {
-	pos := *positions
-	p := *path
-
-	xDist := pos[2] - pos[0]
-	yDist := pos[3] - pos[1]
+func stepTail(positions *[]int, path *map[string]bool, knotOffset int, knotCount int) {
+	tx := 2 * knotOffset
+	ty := tx + 1
+	xDist := (*positions)[2*(knotOffset-1)] - (*positions)[tx]
+	yDist := (*positions)[2*(knotOffset-1)+1] - (*positions)[ty]
 	absX := xDist
 	xMov := 1
 	if xDist < 0 {
@@ -25,30 +24,35 @@ func stepTail(positions *[]int, path *map[string]bool) {
 		absY = -absY
 	}
 	if absX >= 1 && absY > 1 || absX > 1 && absY >= 1 {
-		pos[0] += xMov
-		pos[1] += yMov
+		(*positions)[tx] += xMov
+		(*positions)[ty] += yMov
 	} else if absX > 1 {
-		pos[0] += xMov
+		(*positions)[tx] += xMov
 	} else if absY > 1 {
-		pos[1] += yMov
+		(*positions)[ty] += yMov
 	}
-	p[fmt.Sprintf("%d,%d", pos[0], pos[1])] = true
+	if knotOffset == knotCount {
+		(*path)[fmt.Sprintf("%d,%d", (*positions)[tx], (*positions)[ty])] = true
+	}
 }
 
-func stepHead(x int, y int, positions *[]int, path *map[string]bool) {
-	pos := *positions
+func stepHead(x int, y int, knots int, positions *[]int, path *map[string]bool) {
 	if x != 0 {
-		pos[2] += x
-		stepTail(positions, path)
+		(*positions)[0] += x
+		for i := 0; i < knots; i++ {
+			stepTail(positions, path, i+1, knots)
+		}
 	} else if y != 0 {
-		pos[3] += y
-		stepTail(positions, path)
+		(*positions)[1] += y
+		for i := 0; i < knots; i++ {
+			stepTail(positions, path, i+1, knots)
+		}
 	}
 }
 
-func Solution_09_1() int {
+func doSteps(knots int) int {
 	instructions := readInputSlice("./input/day_09/p1.txt")
-	positions := []int{0, 0, 0, 0}
+	positions := make([]int, (1+knots)*2)
 	path := map[string]bool{}
 	path["0,0"] = true
 	for _, line := range instructions {
@@ -57,19 +61,19 @@ func Solution_09_1() int {
 		dir := rSplit[0]
 		if dir == "U" {
 			for i := 0; i < distance; i++ {
-				stepHead(-1, 0, &positions, &path)
+				stepHead(0, -1, knots, &positions, &path)
 			}
 		} else if dir == "D" {
 			for i := 0; i < distance; i++ {
-				stepHead(1, 0, &positions, &path)
+				stepHead(0, 1, knots, &positions, &path)
 			}
 		} else if dir == "L" {
 			for i := 0; i < distance; i++ {
-				stepHead(0, -1, &positions, &path)
+				stepHead(-1, 0, knots, &positions, &path)
 			}
 		} else if dir == "R" {
 			for i := 0; i < distance; i++ {
-				stepHead(0, 1, &positions, &path)
+				stepHead(1, 0, knots, &positions, &path)
 			}
 		}
 	}
@@ -80,4 +84,12 @@ func Solution_09_1() int {
 		}
 	}
 	return count
+}
+
+func Solution_09_1() int {
+	return doSteps(1)
+}
+
+func Solution_09_2() int {
+	return doSteps(9)
 }

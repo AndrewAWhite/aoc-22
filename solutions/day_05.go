@@ -10,13 +10,11 @@ import (
 
 type RuneSlice []rune
 
-func initStacks(_stack *[][]string, l int) {
-	stacks := *_stack
-	stacks = make([][]string, l)
+func initStacks(stack *[][]string, l int) {
+	*stack = make([][]string, l)
 	for x := 0; x < l; x++ {
-		stacks[x] = []string{}
+		(*stack)[x] = []string{}
 	}
-	*_stack = stacks
 }
 
 func parseStacks(stacksDef string) ([][]string, error) {
@@ -44,15 +42,7 @@ func parseStacks(stacksDef string) ([][]string, error) {
 	return stacks, nil
 }
 
-func popLastN(_stack *[]string, n int) []string {
-	stack := *_stack
-	v := stack[len(stack)-n:]
-	*_stack = stack[:len(stack)-n]
-	return v
-}
-
-func execInstructions(instructionsDef string, _stacks *[][]string, q int) {
-	stacks := *_stacks
+func execInstructions(instructionsDef string, stacks *[][]string, q int) {
 	instructionsSplit := strings.Split(instructionsDef, "\n")
 	re, _ := regexp.Compile("move (?P<count>\\d+) from (?P<source>\\d+) to (?P<dest>\\d+)")
 	for _, instruction := range instructionsSplit {
@@ -62,11 +52,11 @@ func execInstructions(instructionsDef string, _stacks *[][]string, q int) {
 		dest, _ := strconv.Atoi(m[3])
 		source -= 1
 		dest -= 1
-		v := popLastN(&stacks[source], count)
+		v := popLastN(&(*stacks)[source], count)
 		if q == 1 {
 			v = Reverse(v)
 		}
-		stacks[dest] = append(stacks[dest], v...)
+		(*stacks)[dest] = append((*stacks)[dest], v...)
 	}
 }
 
