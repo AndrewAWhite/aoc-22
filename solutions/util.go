@@ -76,3 +76,11 @@ func popFirsttN[T any](stack *[]T, n int) []T {
 	*stack = (*stack)[n:]
 	return v
 }
+
+func abs(d int) int {
+	if d < 0 {
+		return -d
+	} else {
+		return d
+	}
+}
